@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Write a summary | Choices Summary</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<main class="card">
+    <p class="eyebrow">Your turn</p>
+    <h1>Summarize what you read</h1>
+    <p>Enter your name and email, then summarize the ideas from the About page.
+        Your submission will be checked before it is displayed.</p>
+    <form action="Verify.jsp" method="post">
+        <label for="name">Name</label>
+        <input id="name" name="name" type="text" autocomplete="name"
+               required maxlength="9">
+        <small>Start with a capital letter and use fewer than 10 characters.</small>
+
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" autocomplete="email"
+               required>
+        <small>For this exercise, use abc@gmail.com.</small>
+
+        <label for="summary">Your summary</label>
+        <textarea id="summary" name="summary" rows="7" required></textarea>
+
+        <button class="button" type="submit">Submit for verification</button>
+    </form>
+    <p><a href="about.html">Back to About</a></p>
+</main>
+</body>
+</html>

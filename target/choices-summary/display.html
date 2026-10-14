@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Your verified summary | Choices Summary</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<main class="card">
+    <p class="eyebrow">Submission verified</p>
+    <h1>Your summary</h1>
+    <p id="loading" role="status">Loading your verified submission...</p>
+    <section id="result" hidden>
+        <dl>
+            <dt>Name</dt>
+            <dd id="result-name"></dd>
+            <dt>Email</dt>
+            <dd id="result-email"></dd>
+        </dl>
+        <h2>Your summary</h2>
+        <p id="result-summary" class="summary"></p>
+    </section>
+    <p id="error" class="errors" role="alert" hidden></p>
+    <a href="about.html">Return to About</a>
+</main>
+<script>
+    fetch("display-data.jsp", { headers: { "Accept": "application/json" } })
+        .then(function (response) {
+            if (response.status === 204) {
+                throw new Error("No verified submission was found. Please complete the test first.");
+            }
+            if (!response.ok) {
+                throw new Error("The submission could not be loaded. Please try again.");
+            }
+            return response.json();
+        })
+        .then(function (data) {
+            document.getElementById("result-name").textContent = data.name;
+            document.getElementById("result-email").textContent = data.email;
+            document.getElementById("result-summary").textContent = data.summary;
+            document.getElementById("loading").hidden = true;
+            document.getElementById("result").hidden = false;
+        })
+        .catch(function (error) {
+            document.getElementById("loading").hidden = true;
+            var message = document.getElementById("error");
+            message.textContent = error.message;
+            message.hidden = false;
+        });
+</script>
+</body>
+</html>
